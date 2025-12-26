@@ -1,8 +1,169 @@
 import React from 'react'
+import "../Styles/LandPag.css"
+import { useState, useEffect, useRef, useMemo, useContext, Fragment } from 'react'
 
 function LandPag() {
+
+  let BrandPicsArray = ["marca (1)", "marca (2)", "marca (3)", "marca (4)", "marca (5)", "marca (6)", "marca (7)", "marca (8)", "marca (9)", "marca (10)", "marca (11)"]
+
+  let LandPagManager = [
+    { Marca: "TOYOTA", Modelo: "Crown", Foto: "ToyotaHead.png", Frase: "El auto que siempre quisiste a un click de distancia", ColorModelo: "#a1151eff" },
+    { Marca: "PORSCHE", Modelo: "718 Cayman", Foto: "PorscheHead.png", Frase: "El auto ideal para vos te esta esperando", ColorModelo: "#ff5722", Fix: true },
+    { Marca: "AUDI", Modelo: "SportBack", Foto: "AudiHead.png", Frase: "El camino a tu nuevo auto empieza hoy", ColorModelo: "#0e7cf4" },
+    { Marca: "BMW", Modelo: "M4 Coupe", Foto: "BMWHead.png", Frase: "El auto que deseas esta mas cerca que nunca", ColorModelo: "#2772db" },
+    { Marca: "DODGE", Modelo: "Challenger", Foto: "DodgeHead.png", Frase: "Tu auto ideal, más cerca y más fácil que nunca", ColorModelo: "#0fc9e7" },
+    { Marca: "FORD", Modelo: "Mustang", Foto: "FordHead.png", Frase: "Elegir tu próximo auto nunca fue tan emocionante", ColorModelo: "#eb2632" },
+    { Marca: "NISSAN", Modelo: "GTR", Foto: "NissanHead.png", Frase: "Encontrá el auto ideal para vos con tan solo un click", ColorModelo: "#f96d00" },
+  ]
+
+  let [MainLogoAlternator, setMainLogoAlternator] = useState(0)
+
+  useEffect(() => {
+
+    setMainLogoAlternator(Math.floor(Math.random() * LandPagManager.length))
+
+  }, [])
+
+  function MainLogoALternatorPlusButton() {
+
+    switch (true) {
+
+      case MainLogoAlternator >= 0 && MainLogoAlternator < 6:
+        setMainLogoAlternator(preVal => preVal + 1)
+        return;
+
+      case MainLogoAlternator == 6:
+        setMainLogoAlternator(0)
+        return;
+    }
+
+  }
+
+  function MainLogoALternatorMinusButton() {
+
+    switch (true) {
+
+      case MainLogoAlternator > 0 && MainLogoAlternator <= 6:
+        setMainLogoAlternator(preVal => preVal - 1)
+        return;
+
+      case MainLogoAlternator == 0:
+        setMainLogoAlternator(6)
+        return;
+    }
+
+  }
+
+  let SelectedCarMenu = useMemo(() => { return LandPagManager[MainLogoAlternator] }, [LandPagManager, MainLogoAlternator])
+
   return (
-    <div>LandPag</div>
+
+    <div className="MainLandPag">
+
+      <div className="NavContainer">
+
+        <div className="FirstPartNav">
+
+          <div className="BotoneraPrimeraNav"><button type="button" className="Botonera BotoneraLeft">Vehiculos</button></div>
+          <div className="BotoneraPrimeraNav"><button type="button" className="Botonera">Servicios</button></div>
+          <div className="BotoneraPrimeraNav"><button type="button" className="Botonera BotoneraRight">Noticias</button></div>
+
+        </div>
+
+        <div className="SecondPartNav">
+
+          <div className="BotoneraSegundaNav"><button type="button" className="Botonera BotoneraRightB" style={{ visibility: "hidden" }}>AcaVaElLogo</button></div>
+          <div className="BotoneraSegundaNav"><button type="button" className="Botonera BotoneraRightB">Contacto</button></div>
+
+        </div>
+
+      </div>
+
+      <Fragment key={MainLogoAlternator}>
+        <div className="MainLogo">
+
+          <span className="TXTLogo" style={{ fontSize: SelectedCarMenu.Fix ? "22vw" : "26.5vw" }}>{SelectedCarMenu.Marca}</span>
+
+          {/* solia ser 25vw el mayor */}
+
+        </div>
+
+        <div className="MainText">
+
+          <div className="MainContainer">
+
+            <div className="MainTextContainer">
+
+              {SelectedCarMenu.Frase}
+
+            </div>
+
+            <div className="ActionButton">
+
+              <button type="button" className="ButtonMain">Ver Modelos</button>
+
+            </div>
+
+          </div>
+
+        </div>
+
+        <div className="MainPic">
+
+          <img src={SelectedCarMenu.Foto} className="MainPicPix"></img>
+
+        </div>
+
+        <div className="MainLogoBrandModel">
+
+          <span className="LogoBrandModel" style={{ color: SelectedCarMenu.ColorModelo }}>{SelectedCarMenu.Modelo}</span>
+
+        </div>
+
+      </Fragment>
+
+      <div className="MainBrands">
+
+        <div className="UtilBrands">
+
+          <div className="BrandsText">
+
+            <button type="button" className="SliderActionButton" onClick={() => { MainLogoALternatorMinusButton() }}><span className="material-symbols-outlined PlusArrowSymbols">arrow_back</span></button>
+
+            <div className="Separator"></div>
+
+            <span className="SpanBrand">Marcas</span>
+
+            <div className="Separator"></div>
+
+            <button type="button" className="SliderActionButton" onClick={() => { MainLogoALternatorPlusButton() }}><span className="material-symbols-outlined PlusArrowSymbols">arrow_forward</span></button>
+
+          </div>
+
+          <div className="ContainerPicBrandsLogo" >
+
+            {BrandPicsArray.map((val, index) => {
+
+              return (
+
+                <div className="PicBrandsLogo" style={{ animationDelay: index * -10 - 10 + "s" }}>
+
+                  <img className="BrandsPics" src={val + ".png"} ></img>
+
+                </div>
+
+              )
+
+            })}
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
   )
 }
 
