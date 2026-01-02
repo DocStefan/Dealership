@@ -2,6 +2,7 @@ import { BrowserRouter } from 'react-router-dom'
 import { Routes } from 'react-router-dom'
 import { Route } from 'react-router-dom'
 import LandPag from './Components/LandPag'
+import Vehicles from './Components/Vehicles'
 
 function App() {
 
@@ -9,7 +10,7 @@ function App() {
     
     <BrowserRouter>
      <Routes>
-       <Route path="/" element={[<LandPag />]} />
+       <Route path="/" element={[<LandPag />, <Vehicles />]} />
      </Routes>
     </BrowserRouter>
 

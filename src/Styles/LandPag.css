@@ -137,6 +137,8 @@
   margin-left: 4vw;
   margin-top: 17.5px;
 
+  cursor: pointer;
+
 }
 
 .ButtonMain:hover {
@@ -268,6 +270,10 @@
   justify-content: start;
   align-items: center;
 
+  position: relative;
+  overflow: hidden;
+
+  /* estas ultimas dos fueron añadidas como fix */
 
 }
 
@@ -323,6 +329,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
+
+  cursor: pointer;
 
 }
 
@@ -456,6 +464,7 @@
   border-right: solid 1px rgb(255, 255, 255, 0.8);
   border-left: solid 1px rgb(255, 255, 255, 0.8);
 
+  cursor: pointer;
 
   /* background-color: green; */
 
