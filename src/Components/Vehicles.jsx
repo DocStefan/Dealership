@@ -395,7 +395,9 @@ useEffect(() => {Starter()}, [])
 
                     <div className="VehiclesFilterBrandApart">
                         <span className="VehicleFilterText">Marca</span>
-                        <Select options={MarcaOptions} value={MarcaOptions.find(option => option.value === FilterAction.Marca) || null} onChange={(SelectOptionMarca) => { setFilterAction(PreVal => ({ ...PreVal, Marca: SelectOptionMarca ? SelectOptionMarca.value : "" })) }} className="VehicleFilterSelectorReactSelect" classNamePrefix="SelectModel" placeholder="Marcas" noOptionsMessage={() => "Sin marcas"} isClearable />
+                        <Select options={MarcaOptions} 
+                        // value={MarcaOptions.find(option => option.value === FilterAction.Marca) || null} - FIX de que al seleccionar un tipo habiendo seleccionado una marca que no lo contenia se reiniciaba la marca pero solo visualmente, al volver al tipo correcto seguia siendo la misma marca
+                        onChange={(SelectOptionMarca) => { setFilterAction(PreVal => ({ ...PreVal, Marca: SelectOptionMarca ? SelectOptionMarca.value : "" })) }} className="VehicleFilterSelectorReactSelect" classNamePrefix="SelectModel" placeholder="Marcas" noOptionsMessage={() => "Sin marcas"} isClearable />
                     </div>
 
                     {/* el apartado value del select anterior "MARCA" mas todo lo relacionado al HomeModelSelected en este componente puede dar un error, chequear en caso de que suceda */}
